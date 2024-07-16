@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="image">Profile Picture</label>
+            {% if p_form.instance.image %}
+                <div id="current-profile-picture">
+                    <img id="profile-picture-preview" src="{{ p_form.instance.image.url }}" class="rounded-circle" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover; margin-bottom: 20px;">
+                </div>
+            {% endif %}
+            {{ p_form.image }}
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            {{ u_form.username }}
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            {{ u_form.email }}
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-danger">Cancel</button>
+    </form>
+
+    <script>
+        document.getElementById('id_image').onchange = function (evt) {
+            const [file] = this.files;
+            if (file) {
+                document.getElementById('profile-picture-preview').src = URL.createObjectURL(file);
+            }
+        };
+    </script>
+{% endblock %}
