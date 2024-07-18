@@ -84,8 +84,10 @@ class PostListView(ListView):
             return Post.objects.filter(
                 Q(title__icontains=query) |
                 Q(content__icontains=query) |
-                Q(author__username__icontains=query)
-            ).order_by('-date_posted')
+                Q(author__username__icontains=query) |
+                Q(tags__name__icontains=query) |
+                Q(categories__name__icontains=query)
+            ).distinct().order_by('-date_posted')
         return Post.objects.all().order_by('-date_posted')
     
 

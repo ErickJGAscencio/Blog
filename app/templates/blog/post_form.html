@@ -8,18 +8,20 @@
       {{ form.title.label_tag }}
       {{ form.title }}
     </div>
+    <div class="d-flex">
+      <div class="form-group d-flex">
+        <p>Categories</p>
+        {{ form.categories }}
+      </div>
+      <div class="form-group d-flex">
+        <p>Tags</p>
+        {{ form.tags }}
+      </div>
+    </div>
     <div class="form-group">
       {{ form.content.label_tag }}
       {{ form.content }}
-    </div>
-    <div class="form-group">
-      {{ form.categories.label_tag }}
-      {{ form.categories }}
-    </div>
-    <div class="form-group">
-      {{ form.tags.label_tag }}
-      {{ form.tags }}
-    </div>
+    </div>    
     <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Post{% endif %}</button>  
   </form>
   {% if form.instance.pk %}
