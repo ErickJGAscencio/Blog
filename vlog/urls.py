@@ -21,10 +21,10 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('', include('app.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('', include('app.urls')),
 ]
 
 if settings.DEBUG:

@@ -89,11 +89,6 @@ class PostListView(ListView):
                 Q(categories__name__icontains=query)
             ).distinct().order_by('-date_posted')
         return Post.objects.all().order_by('-date_posted')
-    
-
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/post_detail.html'
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -135,10 +130,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(post=self.object).order_by('date_posted')
         context['comment_form'] = CommentForm()
+        context['related_posts'] = Post.objects.exclude(pk=self.object.pk).order_by('-date_posted')[:5]
         return context
 
     def post(self, request, *args, **kwargs):

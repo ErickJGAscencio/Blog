@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class PostForm(forms.ModelForm):
+class PostForm(forms.ModelForm):    
     class Meta:
         model = Post
         fields = ['title', 'content', 'categories', 'tags']

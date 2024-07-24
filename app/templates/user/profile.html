@@ -21,7 +21,7 @@
             {{ u_form.email }}
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
-        <button type="button" class="btn btn-danger">Cancel</button>
+        <a href="{% url 'user-profile' user.username %}" class="btn btn-danger">Cancel</a>
     </form>
 
     <script>
